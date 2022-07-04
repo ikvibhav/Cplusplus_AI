@@ -1,39 +1,37 @@
 #include<iostream>
 #include<vector>
-#include<cmath>
-#include<algorithm>
 
 int main(){
     std::vector<int> x = {1,2,3,4,5,6,7,8,9,10};
     std::vector<int> y = {1,2,3,4,5,6,7,8,9,10};
-
     int dataset_length = x.size();
-    std::cout << dataset_length << std::endl;
 
     std::vector<double> error_vector;
     double index_error;
+    int input_pred_value;
 
-    double b0 = 10;
-    double b1 = 10;
+    //Hyperparamters
+    double b0 = 2;
+    double b1 = 2;
     double learning_rate = 0.0001;
+    int epochs = 50000;
 
     //Training Phase
-    for(uint16_t i=0; i<20000; i++){
-        uint16_t index = i % dataset_length;
-        double p = b0 + b1*x[index];
-        index_error = p - y[index];
-        b0 = b0 - learning_rate*index_error;
-        b1 = b1 - learning_rate*index_error*x[index];
-        std::cout<<"i = " << i << " b0 = "<< b0 << " b1 = "<< b1 << " index_error = " << index_error << std::endl;
-        error_vector.push_back(index_error);
+    for(uint16_t i=0; i<epochs; i++){
+
+        for(uint8_t index=0; index<dataset_length; index++){
+            double p = b0 + b1*x[index];
+            index_error = p - y[index];
+            b0 = b0 - learning_rate*index_error;
+            b1 = b1 - learning_rate*index_error*x[index];
+            error_vector.push_back(index_error);
+        }
+        //std::cout << "Epoch " << +i << " - b0 = "<< b0 << " b1 = "<< b1 << " index_error = " << index_error << std::endl;
     }
-    // Goes to infitiy when squared is given. Why???
+    std::cout << "Training Phase Complete. b0 = " << b0 << " b1 = " << b1 << std::endl;
 
-    //Select Optimal b0 and b1 values
-    //sort(error_vector.begin(), error_vector.end(), custom_sort);
-    std::cout<<"b0 = "<< b0 << " b1 = "<< b1 << " index_error = " << index_error << std::endl;
-
+    //Prediction Phase
+    std::cout << "Prediction Phase Begin. Enter Input Integer Value" << std::endl;
+    std::cin >> input_pred_value;
+    std::cout << "Predicted Output for " << input_pred_value << " is " << b0+b1*input_pred_value << std::endl;    
 }
-
-// When uint8_t used until 255, then it does not work. 
-// After 256, the program decreases the index error, however the program crashes!
