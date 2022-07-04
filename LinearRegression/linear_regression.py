@@ -21,5 +21,5 @@ for i in range(epochs):
 duration = time.time() - start
 
 print(f'Training Phase Completed in {duration*1000} milliseconds. b0 = {b0} b1 = {b1}')
-# input_pred_value = input('Prediction Phase Begin. Enter Input Integer Value ')
-# print(f'Predicted Output for {input_pred_value} is {b0 + b1*int(input_pred_value)}')
+input_pred_value = input('Prediction Phase Begin. Enter Input Integer Value ')
+print(f'Predicted Output for {input_pred_value} is {b0 + b1*int(input_pred_value)}')

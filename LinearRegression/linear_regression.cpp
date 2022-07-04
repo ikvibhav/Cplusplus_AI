@@ -35,8 +35,7 @@ int main(){
     std::cout << "Training Phase Completed in " << duration.count() << " milliseconds. b0 = " << b0 << " b1 = " << b1 << std::endl;
 
     //Prediction Phase
-//     std::cout << "Prediction Phase Begin. Enter Input Integer Value" << std::endl;
-//     std::cin >> input_pred_value;
-//     std::cout << "Predicted Output for " << input_pred_value << " is " << b0+b1*input_pred_value << std::endl;    
-// 
+    std::cout << "Prediction Phase Begin. Enter Input Integer Value" << std::endl;
+    std::cin >> input_pred_value;
+    std::cout << "Predicted Output for " << input_pred_value << " is " << b0+b1*input_pred_value << std::endl;    
 }
