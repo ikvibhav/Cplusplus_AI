@@ -8,18 +8,22 @@ b0 = 2
 b1 = 2
 learning_rate = 0.0001
 epochs = 50000
+number_of_runs = 10
 
-start = time.time()
 
-for i in range(epochs):
-    for index in range(dataset_length):
-        p = b0 + b1*x[index]
-        index_error = p - y[index]
-        b0 = b0 - learning_rate*index_error
-        b1 = b1 - learning_rate*index_error*x[index]
+for run_index in range(number_of_runs):
+    start = time.time()
+    for i in range(epochs):
+        for index in range(dataset_length):
+            p = b0 + b1*x[index]
+            index_error = p - y[index]
+            b0 = b0 - learning_rate*index_error
+            b1 = b1 - learning_rate*index_error*x[index]
+    duration = time.time() - start
+    print(f'Run {run_index} Completed in {duration*1000} milliseconds. b0 = {b0} b1 = {b1}')
 
-duration = time.time() - start
 
-print(f'Training Phase Completed in {duration*1000} milliseconds. b0 = {b0} b1 = {b1}')
-input_pred_value = input('Prediction Phase Begin. Enter Input Integer Value ')
-print(f'Predicted Output for {input_pred_value} is {b0 + b1*int(input_pred_value)}')
+
+# print(f'Training Phase Completed in {duration*1000} milliseconds. b0 = {b0} b1 = {b1}')
+# input_pred_value = input('Prediction Phase Begin. Enter Input Integer Value ')
+# print(f'Predicted Output for {input_pred_value} is {b0 + b1*int(input_pred_value)}')
