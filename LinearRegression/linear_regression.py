@@ -30,7 +30,7 @@ for epochs in epochslist:
         duration = time.time() - start
         #print(f'Run {run_index} Completed in {duration*1000} milliseconds. b0 = {b0} b1 = {b1}')
         
-        row_to_write = ['python',epochs, run_index, int(duration*1000), index_error]
+        row_to_write = ['Python',epochs, run_index, int(duration*1000), index_error]
 
         with open(csvfile_python, 'a') as f:
             writer = csv.writer(f)
