@@ -16,6 +16,7 @@ learning_rate = 0.0001
 epochs = 40000
 number_of_runs = 20
 
+#for run_index in range(number_of_runs):
 b0 = b0_init
 b1 = b1_init
 start = time.time()
@@ -27,8 +28,4 @@ for i in range(epochs):
         b1 = b1 - learning_rate*index_error*x[index]
 duration = time.time() - start
 print(f'Completed in {duration*1000} milliseconds. b0 = {b0} b1 = {b1}')
-
-print(f'Enter Independent Variable')
-input_pred_value = input();
-print(f'Predicted Value is {b0+int(input_pred_value)*b1}')
-
+#print(f'Run {run_index} Completed in {duration*1000} milliseconds. b0 = {b0} b1 = {b1}')

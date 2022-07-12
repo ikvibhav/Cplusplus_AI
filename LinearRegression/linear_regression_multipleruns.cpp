@@ -27,20 +27,22 @@ int main(){
     int number_of_runs = 20;
 
     //Training Phase
-    b0 = b0_init;
-    b1 = b1_init;
-    auto start = std::chrono::high_resolution_clock::now();
-    for(uint32_t i=0; i<epochs; i++){
-        for(uint8_t index=0; index<dataset_length; index++){
-            double p = b0 + b1*x[index];
-            index_error = p - y[index];
-            b0 = b0 - learning_rate*index_error;
-            b1 = b1 - learning_rate*index_error*x[index];
+    for(uint8_t run_num=0; run_num < number_of_runs; run_num++){
+        b0 = b0_init;
+        b1 = b1_init;
+        auto start = std::chrono::high_resolution_clock::now();
+        for(uint32_t i=0; i<epochs; i++){
+            for(uint8_t index=0; index<dataset_length; index++){
+                double p = b0 + b1*x[index];
+                index_error = p - y[index];
+                b0 = b0 - learning_rate*index_error;
+                b1 = b1 - learning_rate*index_error*x[index];
+            }
         }
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
+        std::cout << "Run " << +run_num << "completed in " << duration.count() << " milliseconds. b0 = " << b0 << " b1 = " << b1 << " index_error = " << index_error << std::endl;
     }
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
-    std::cout << "Completed in " << duration.count() << " milliseconds. b0 = " << b0 << " b1 = " << b1 << " index_error = " << index_error << std::endl;
 
     //Prediction Phase
     std::cout << "Enter Independent Variable " << std::endl;
